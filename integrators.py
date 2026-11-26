@@ -9,8 +9,10 @@ class BaseIntegrator:
 
     def __init__(self, func, a, b):
         """Ініціалізує підінтегральну функцію та межі інтегрування."""
-        pass
-
+        self.func = func
+        self.a = a
+        self.b = b
+    
     @classmethod
     def from_dict(cls, func, params):
         """Альтернативний конструктор для створення інтегратора зі словника."""
@@ -21,7 +23,6 @@ class BaseIntegrator:
         """Перевіряє коректність меж інтегрування."""
         if a >= b:
             raise ValueError("Incorrect bounds")
-        pass
 
     def integrate(self, n):
         """Обчислює наближене значення інтеграла для n розбиттів."""
@@ -46,7 +47,6 @@ class RectangleIntegrator(BaseIntegrator):
 
     def __init__(self, func, a, b):
         super().__init__(func,a,b)
-        pass
 
     def integrate(self, n):
         h = (self.a - self.b)/n
@@ -62,7 +62,6 @@ class TrapezoidIntegrator(BaseIntegrator):
 
     def __init__(self, func, a, b):
         super().__init__(func,a,b)
-        pass
 
     def integrate(self, n):
         h = (self.a - self.b)/n
@@ -78,7 +77,6 @@ class SimpsonIntegrator(BaseIntegrator):
 
     def __init__(self, func, a, b):
         super().__init__(func,a,b)
-        pass
 
     def integrate(self, n):
         h = (self.a - self.b)/n
