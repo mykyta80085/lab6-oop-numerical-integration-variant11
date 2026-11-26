@@ -37,14 +37,17 @@ class BaseIntegrator:
 class RectangleIntegrator(BaseIntegrator):
     """Обчислення інтеграла складеною формулою середніх прямокутників."""
 
-    order = None
+    order = 2
     method_name = "Формула прямокутників"
 
     def __init__(self, func, a, b):
+        super().__init__(func,a,b)
         pass
 
     def integrate(self, n):
-        pass
+        h = (self.a - self.b)/n
+        integral = sum(h*self.func(self.a + h*(i + 0.5)) for i in range(n))
+        return(integral)
 
 
 class TrapezoidIntegrator(BaseIntegrator):
