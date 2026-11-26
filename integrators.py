@@ -62,18 +62,24 @@ class TrapezoidIntegrator(BaseIntegrator):
 
     def integrate(self, n):
         h = (self.a - self.b)/n
-        integral = h*(self.a + self.b)/2 + sum(h*self.func(a+i*h) for i in range(1,n))
+        integral = h*(self.func(self.a) + self.func(self.b))/2 + sum(h*self.func(self.a + i*h) for i in range(1,n))
         return(integral)
 
 
 class SimpsonIntegrator(BaseIntegrator):
     """Обчислення інтеграла складеною формулою Сімпсона."""
 
-    order = None
+    order = 4
     method_name = "Формула Сімпсона"
 
     def __init__(self, func, a, b):
+        super().__init__(func,a,b)
         pass
 
     def integrate(self, n):
+        h = (self.a - self.b)/n
+        integral = h/3 * (self.func(self.a)+self.func(self.b))
+        + sum(h*4/3*self.func(self.a + i*h) for i in range(1,n,2))
+        + sum(h*2/3*self.func(self.a + i*h) for i in range(2,n-1,2))
+        return(integral)
         pass
