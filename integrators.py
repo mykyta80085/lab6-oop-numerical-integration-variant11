@@ -16,7 +16,7 @@ class BaseIntegrator:
     @classmethod
     def from_dict(cls, func, params):
         """Альтернативний конструктор для створення інтегратора зі словника."""
-        pass
+        return cls(func, params["a"],params["b"])
 
     @staticmethod
     def validate_bounds(a, b):
