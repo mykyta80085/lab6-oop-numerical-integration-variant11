@@ -16,14 +16,17 @@ from integrators import (
 
 def target_function(x):
     """Підінтегральна функція згідно з індивідуальним варіантом."""
-    return((math.cos(x)-1)/(x*x))
+    if abs(x) <= 5*10**(-8):
+        return(-1/2)
+    else:
+        return((math.cos(x)-1)/(x*x))
 
 
 def main():
     """Точка входу програми."""
     func = target_function
     params = {"a": 0.0, "b":1.0}
-    eps = 0.00002
+    eps = 0.0001
     integrators = [RectangleIntegrator.from_dict(func, params), TrapezoidIntegrator.from_dict(func, params), SimpsonIntegrator.from_dict(func, params)]
     for integrator in integrators:
         print(f"\t{integrator}")
