@@ -19,6 +19,8 @@ class BaseIntegrator:
     @staticmethod
     def validate_bounds(a, b):
         """Перевіряє коректність меж інтегрування."""
+        if a >= b:
+            raise ValueError("Incorrect bounds")
         pass
 
     def integrate(self, n):
