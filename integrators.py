@@ -63,7 +63,7 @@ class RectangleIntegrator(BaseIntegrator):
         super().__init__(func,a,b)
 
     def integrate(self, n):
-        h = (self.a - self.b)/n
+        h = -(self.a - self.b)/n
         integral = sum(h*self.func(self.a + h*(i + 0.5)) for i in range(n))
         return(integral)
 
@@ -78,7 +78,7 @@ class TrapezoidIntegrator(BaseIntegrator):
         super().__init__(func,a,b)
 
     def integrate(self, n):
-        h = (self.a - self.b)/n
+        h = -(self.a - self.b)/n
         integral = h*(self.func(self.a) + self.func(self.b))/2 + sum(h*self.func(self.a + i*h) for i in range(1,n))
         return(integral)
 
@@ -93,7 +93,7 @@ class SimpsonIntegrator(BaseIntegrator):
         super().__init__(func,a,b)
 
     def integrate(self, n):
-        h = (self.a - self.b)/n
+        h = -(self.a - self.b)/n
         Sum1 = sum(self.func(self.a + i*h)for i in range(1,n,2))
         Sum2 = sum(self.func(self.a + i*h)for i in range(2,n-1,2))
         return (h/3)*(self.func(self.a)+self.func(self.b)+4*Sum1+2*Sum2)
