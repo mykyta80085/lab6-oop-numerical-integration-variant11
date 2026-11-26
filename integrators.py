@@ -31,7 +31,9 @@ class BaseIntegrator:
 
     def __str__(self):
         """Повертає рядкове представлення об'єкта інтегратора."""
-        pass
+        return(f'{self.method_name} на відрізку {[self.a,self.b]} (порядок точності O(h^{self.order})')
+    
+
 
 
 class RectangleIntegrator(BaseIntegrator):
@@ -82,4 +84,4 @@ class SimpsonIntegrator(BaseIntegrator):
         + sum(h*4/3*self.func(self.a + i*h) for i in range(1,n,2))
         + sum(h*2/3*self.func(self.a + i*h) for i in range(2,n-1,2))
         return(integral)
-        pass
+    
