@@ -30,7 +30,21 @@ class BaseIntegrator:
 
     def adaptive_integrate(self, eps=1e-4, initial_n=2):
         """Знаходить інтеграл із заданою точністю eps за правилом Рунге."""
-        pass
+        n = initial_n
+        koef = 2**self.order-1
+        I_h = self.integrate(n)
+        I_h2 = self.integrate(2*n)
+        delta = abs(I_h-I_h2)/koef
+        print(f"n = {n} -> I = {I_h}")
+        while delta>=eps:
+            n*=2
+            I_h = I_h2
+            I_h2 = self.integrate(2*n)
+            delta = abs(I_h2-I_h)/koef
+            print(f"n = {n} -> I = {I_h}")
+        print(f"n = {2*n} -> I = {I_h2}")
+        value = I_h2 + (I_h2 - I_h)/koef
+        return value,2*n,delta
 
     def __str__(self):
         """Повертає рядкове представлення об'єкта інтегратора."""
