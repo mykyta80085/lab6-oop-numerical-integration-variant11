@@ -48,8 +48,11 @@ class BaseIntegrator:
 
     def __str__(self):
         """Повертає рядкове представлення об'єкта інтегратора."""
-        return(f'{self.method_name} на відрізку {[self.a,self.b]} (порядок точності O(h^{self.order})')
-    
+        framedstr = str("-------------------------------------------------------------------\n"
+        + f'| {self.method_name} | на відрізку {[self.a,self.b]} | (порядок точності O(h^{self.order})|\n'
+        + "-------------------------------------------------------------------")
+        return(framedstr)
+
 
 
 
@@ -61,10 +64,12 @@ class RectangleIntegrator(BaseIntegrator):
 
     def __init__(self, func, a, b):
         super().__init__(func,a,b)
+        self.times_used = 0
 
     def integrate(self, n):
         h = -(self.a - self.b)/n
         integral = sum(h*self.func(self.a + h*(i + 0.5)) for i in range(n))
+        self.times_used += 1
         return(integral)
 
 
@@ -76,10 +81,12 @@ class TrapezoidIntegrator(BaseIntegrator):
 
     def __init__(self, func, a, b):
         super().__init__(func,a,b)
+        self.times_used = 0
 
     def integrate(self, n):
         h = -(self.a - self.b)/n
         integral = h*(self.func(self.a) + self.func(self.b))/2 + sum(h*self.func(self.a + i*h) for i in range(1,n))
+        self.times_used += 1
         return(integral)
 
 
@@ -91,10 +98,12 @@ class SimpsonIntegrator(BaseIntegrator):
 
     def __init__(self, func, a, b):
         super().__init__(func,a,b)
+        self.times_used = 0
 
     def integrate(self, n):
         h = -(self.a - self.b)/n
         Sum1 = sum(self.func(self.a + i*h)for i in range(1,n,2))
         Sum2 = sum(self.func(self.a + i*h)for i in range(2,n-1,2))
+        self.times_used += 1
         return (h/3)*(self.func(self.a)+self.func(self.b)+4*Sum1+2*Sum2)
     
