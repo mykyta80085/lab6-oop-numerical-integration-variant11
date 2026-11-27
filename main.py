@@ -26,6 +26,7 @@ def main():
     eps = 0.00002
     integrators = [RectangleIntegrator.from_dict(func, params), TrapezoidIntegrator.from_dict(func, params), SimpsonIntegrator.from_dict(func, params)]
     for integrator in integrators:
+        integrator.validate_bounds(params["a"],params["b"])
         print(f"\t{integrator}")
         res = integrator.adaptive_integrate(eps, initial_n=2)
         print(f"Уточнений результат: {res[0]} (n_min = {res[1]}, похибка = {res[2]})")
